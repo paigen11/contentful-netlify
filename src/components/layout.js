@@ -8,10 +8,18 @@ import './layout.css';
 const Layout = ({ children, data }) => (
   <StaticQuery
     query={graphql`
-      query SiteTitleQuery {
+      query Layout {
         site {
           siteMetadata {
             title
+            desc
+          }
+        }
+        background: file(relativePath: { eq: "bg.jpeg" }) {
+          childImageSharp {
+            fluid(maxWidth: 1240) {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
       }
@@ -44,14 +52,3 @@ Layout.propTypes = {
 };
 
 export default Layout;
-
-export const query = graphql`
-  query LayoutQuery {
-    site {
-      siteMetadata {
-        title
-        desc
-      }
-    }
-  }
-`;
