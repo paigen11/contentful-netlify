@@ -1,21 +1,19 @@
 import React from 'react';
 import Layout from '../components/layout';
-import Image from '../components/image';
 import SEO from '../components/seo';
 
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hello people</h1>
     <p>{data.site.siteMetadata.title}</p>
     <p>{data.site.siteMetadata.desc}</p>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
+    {data.allMarkdownRemark.edges.map(({ node }) => {
+      return <PostListing post={node} />;
+    })}
   </Layout>
 );
+
+const PostListing = () => <div>Hello</div>;
 
 export default IndexPage;
 
@@ -25,6 +23,17 @@ export const query = graphql`
       siteMetadata {
         title
         desc
+      }
+    }
+    allMarkdownRemark {
+      edges {
+        node {
+          frontmatter {
+            title
+            date(formatString: "MMM DD YYYY")
+          }
+          html
+        }
       }
     }
   }
