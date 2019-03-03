@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import PostListing from '../components/Posts/PostListing';
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -12,8 +13,6 @@ const IndexPage = ({ data }) => (
     })}
   </Layout>
 );
-
-const PostListing = () => <div>Hello</div>;
 
 export default IndexPage;
 
