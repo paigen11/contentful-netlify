@@ -6,11 +6,10 @@ import PostListing from '../components/Posts/PostListing';
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <p>{data.site.siteMetadata.title}</p>
-    <p>{data.site.siteMetadata.desc}</p>
-    {data.allMarkdownRemark.edges.map(({ node }) => {
-      return <PostListing post={node} />;
-    })}
+    <h2>Posts</h2>
+    {data.allMarkdownRemark.edges.map(({ node }) => (
+      <PostListing key={node.id} post={node} />
+    ))}
   </Layout>
 );
 
@@ -27,11 +26,13 @@ export const query = graphql`
     allMarkdownRemark {
       edges {
         node {
+          id
           frontmatter {
             title
             date(formatString: "MMM DD YYYY")
           }
           html
+          excerpt(pruneLength: 280)
         }
       }
     }
