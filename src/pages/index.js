@@ -1,4 +1,5 @@
 import React from 'react';
+import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import PostListing from '../components/Posts/PostListing';
@@ -30,6 +31,9 @@ export const query = graphql`
           frontmatter {
             title
             date(formatString: "MMM DD YYYY")
+          }
+          fields {
+            slug
           }
           html
           excerpt(pruneLength: 280)

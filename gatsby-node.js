@@ -19,9 +19,9 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 };
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
-  return new Promise((resolve, reject) => {
-    graphql(`
+  async const { createPage } = actions;
+   return new Promise((resolve, reject) => {
+     graphql(`
       {
         allMarkdownRemark {
           edges {
@@ -37,10 +37,10 @@ exports.createPages = ({ graphql, actions }) => {
       if (result.errors) {
         throw result.errors;
       }
-      result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      await result.data.allMarkdownRemark.edges.forEach(({ node }) => {
         createPage({
           path: node.fields.slug,
-          component: path.resolve(`./src/pages/about.js`),
+          component: path.resolve(`./src/posts/PostPage.js`),
           context: {
             slug: node.fields.slug,
           },
