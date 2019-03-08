@@ -4,8 +4,8 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import PostListing from '../components/Posts/PostListing';
 
-const IndexPage = ({ data }) => (
-  <Layout>
+const IndexPage = ({ data, location }) => (
+  <Layout location={location}>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <h2>Posts</h2>
     {data.allMarkdownRemark.edges.map(({ node }) => (

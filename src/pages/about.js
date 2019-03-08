@@ -3,8 +3,9 @@ import Layout from '../components/layout';
 
 export default class About extends Component {
   render() {
+    const { location } = this.props;
     return (
-      <Layout>
+      <Layout location={location}>
         <h1>About Us</h1>
         <p>
           Lorem ipsum dolor amet kogi yuccie yr ramps next level kinfolk paleo

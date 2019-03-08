@@ -18,35 +18,31 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   }
 };
 
-exports.createPages = ({ graphql, actions }) => {
-  async const { createPage } = actions;
-   return new Promise((resolve, reject) => {
-     graphql(`
-      {
-        allMarkdownRemark {
-          edges {
-            node {
-              fields {
-                slug
-              }
+exports.createPages = async ({ graphql, actions }) => {
+  await graphql(`
+    {
+      allMarkdownRemark {
+        edges {
+          node {
+            fields {
+              slug
             }
           }
         }
       }
-    `).then(result => {
-      if (result.errors) {
-        throw result.errors;
-      }
-      await result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-        createPage({
-          path: node.fields.slug,
-          component: path.resolve(`./src/posts/PostPage.js`),
-          context: {
-            slug: node.fields.slug,
-          },
-        });
+    }
+  `).then(result => {
+    if (result.errors) {
+      throw result.errors;
+    }
+    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      actions.createPage({
+        path: node.fields.slug,
+        component: path.resolve(`./src/posts/PostPage.js`),
+        context: {
+          slug: node.fields.slug,
+        },
       });
-      resolve();
     });
   });
 };
