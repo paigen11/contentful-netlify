@@ -26,6 +26,27 @@ const HeaderContainer = styled.div`
   padding: 1.45rem 1.0875rem;
   position: relative;
   z-index: 2;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const MainNav = styled.nav`
+  ul {
+    list-style: none;
+    display: flex;
+    li {
+      margin-left: 10px;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+      a {
+        text-decoration: none;
+        color: #fff;
+        &:hover {
+          border-bottom: 3px solid #524763;
+        }
+      }
+    }
+  }
 `;
 
 export default class Header extends Component {
@@ -34,14 +55,14 @@ export default class Header extends Component {
     if (location.pathname !== prevProps.location.pathname) {
       if (this.props.location.pathname === '/') {
         this.wrapper.animate([{ height: '20vh' }, { height: '70vh' }], {
-          duration: 4000,
+          duration: 400,
           fill: 'forwards',
           easing: 'cubic-bezier(0.86, 0, 0.07, 0.1)',
           iterations: 1,
         });
       } else {
         this.wrapper.animate([{ height: '70vh' }, { height: '20vh' }], {
-          duration: 4000,
+          duration: 400,
           fill: 'forwards',
           easing: 'cubic-bezier(0.86, 0, 0.07, 0.1)',
           iterations: 1,
@@ -70,7 +91,7 @@ export default class Header extends Component {
                 <img src={logo} alt="Level Up Logo" />
               </Link>
             </h1>
-            <nav>
+            <MainNav>
               <ul>
                 <li>
                   <Link to="/">Home</Link>
@@ -79,7 +100,7 @@ export default class Header extends Component {
                   <Link to="/about">About</Link>
                 </li>
               </ul>
-            </nav>
+            </MainNav>
           </HeaderContainer>
           <Img
             style={{
@@ -88,6 +109,7 @@ export default class Header extends Component {
               top: 0,
               width: '100%',
               height: '100%',
+              opacity: 0.3,
             }}
             fluid={data.background.childImageSharp.fluid}
           />
