@@ -5,6 +5,7 @@ import { graphql } from 'gatsby';
 export default class PostPage extends Component {
   render() {
     const { data, location } = this.props;
+    if (!data) return null;
     return (
       <Layout location={location}>
         <div>
