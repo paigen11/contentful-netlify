@@ -8,7 +8,7 @@ const IndexPage = ({ data, location }) => (
   <Layout location={location}>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <h2>Posts</h2>
-    {data.allMarkdownRemark.edges.map(({ node }) => (
+    {data.allContentfulBlogPost.edges.map(({ node }) => (
       <PostListing key={node.id} post={node} />
     ))}
   </Layout>
@@ -22,6 +22,21 @@ export const query = graphql`
       siteMetadata {
         title
         desc
+      }
+    }
+    allContentfulBlogPost {
+      edges {
+        node {
+          title
+          body {
+            childMarkdownRemark {
+              excerpt
+            }
+          }
+          createdAt(formatString: "MMMM DD, YYYY")
+          slug
+          id
+        }
       }
     }
   }
